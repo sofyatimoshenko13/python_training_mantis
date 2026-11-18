@@ -7,6 +7,7 @@ class ProjectHelper:
 
     def create_project(self, project):
         wd = self.app.wd
+        self.open_projects_page()
         wd.find_element_by_xpath("//button[normalize-space()='Создать новый проект']").click()
         wd.find_element_by_name("name").click()
         wd.find_element_by_name("name").send_keys(project.name)
