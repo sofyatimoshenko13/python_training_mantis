@@ -7,7 +7,6 @@ class ProjectHelper:
 
     def create_project(self, project):
         wd = self.app.wd
-        self.open_projects_page()
         wd.find_element_by_xpath("//button[normalize-space()='Создать новый проект']").click()
         wd.find_element_by_name("name").click()
         wd.find_element_by_name("name").send_keys(project.name)
@@ -20,7 +19,6 @@ class ProjectHelper:
 
     def get_project_list(self):
         wd = self.app.wd
-        self.open_projects_page()
         projects = []
         for element in wd.find_elements_by_css_selector("a[href*='manage_proj_edit_page.php?project_id=']"):
             text = element.text.strip()
@@ -31,7 +29,6 @@ class ProjectHelper:
 
     def delete_project_by_id(self, id):
         wd = self.app.wd
-        self.open_projects_page()
         wd.find_element_by_css_selector("a[href*='manage_proj_edit_page.php?project_id=%s']" % id).click()
         wd.find_element_by_css_selector("button[formaction='manage_proj_delete.php']").click()
         wd.find_element_by_css_selector("input[value='Удалить проект']").click()
