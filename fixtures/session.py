@@ -36,7 +36,7 @@ class SessionHelper:
 
     def is_logged_in(self) -> bool:
         wd = self.app.wd
-        return len(wd.find_element_by_css_selector("span.user-info")) > 0
+        return len(wd.find_elements_by_css_selector("span.user-info")) > 0
 
     def is_logged_in_as(self, username) -> bool:
         wd = self.app.wd
