@@ -1,8 +1,13 @@
 import random
+from models.project import Project
+
 
 def test_add_project(app):
-    wd = app.wd
     app.session.login("administrator", "root")
-    wd.find_element_by_xpath("//a[span[normalize-space()='Управление']]").click()
-    wd.find_element_by_css_selector("a[href*='manage_proj_page.php']").click()
-    app.project.create_project("new project" + str(random.randint(1, 10000)))
+    old_projects = app.project.get_project_list()
+    project = Project(name="new_project_" + str(random.randint(1, 10000)))
+    app.project.create_project(project)
+    new_projects = app.project.get_project_list()
+    old_projects.append(project)
+    assert sorted(old_projects, key=Project.id_or_max) == sorted(new_projects, key=Project.id_or_max)
+
