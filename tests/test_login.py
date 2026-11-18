@@ -1,3 +1,5 @@
-def test_login(app):
-    app.session.login("administrator", "root")
-    assert app.soap.can_login("administrator", "root")
+def test_login(app, config):
+    username = config['webadmin']['username']
+    password = config['webadmin']['password']
+    app.session.login(username, password)
+    assert app.soap.can_login(username, password)
